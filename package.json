@@ -2,9 +2,10 @@
   "name": "back_emergencia",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "echo \"src/server.js\" && exit 1"
+    "dev": "nodemon src/server.js"
   },
   "keywords": [],
   "author": "",
