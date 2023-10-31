@@ -7,3 +7,4 @@ const controller = new Controller();
 usersRouter.get('/selecionarSalas', controller.getRooms)
 
 
+
