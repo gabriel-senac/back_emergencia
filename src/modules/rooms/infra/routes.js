@@ -4,4 +4,6 @@ import { Controller } from './Controller.js';
 export const usersRouter = Router();
 const controller = new Controller();
 
-usersRouter.get('/', controller.get)
+usersRouter.get('/selecionarSalas', controller.getRooms)
+
+
