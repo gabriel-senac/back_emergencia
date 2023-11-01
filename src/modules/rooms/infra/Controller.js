@@ -35,6 +35,17 @@ export class Controller {
                 return response.status(500).json({ message: 'Não foi possível identificar as salas.' });
             }
     }
+    
+    async statusError(request, response) {
+        const {room} = request.body
+        try {
+            const [rows, fields] = await connection.query('/');
+            return response.status(400).json(rows);
+            } catch (error) {
+                console.error(error);
+                return response.status(500).json({ message: 'Não foi possível identificar as salas.' });
+            }
+    }
   
 
 }
