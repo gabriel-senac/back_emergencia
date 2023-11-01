@@ -1,6 +1,5 @@
 import { connection } from '../../../connection.js'
 
-
 export class Controller {
 
 
@@ -15,7 +14,18 @@ export class Controller {
     }
   
 
-
-
+    async postRequerimento(request, response) {
+        const {room} = request.body;
+        try {
+            const [rows, fields] = await connection.query('INSERT INTO rooms WHERE room = ?', [room]);
+            return response.json(rows);
+            } catch (error) {
+                console.error(error);
+                return response.status(500).json({ message: 'Não foi possível identificar as salas.' });
+            }
+    }
+  
 
 }
+
+
