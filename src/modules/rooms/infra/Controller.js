@@ -1,9 +1,11 @@
-import { connection } from '../../../connection.js'
+// import { connection } from '../../../connection.js'
 
 export class Controller {
 
 
     async getRooms(request, response) {
+
+        return response.status(200).json({message: "GET DEU CERTO"});
         try {
             const [rows, fields] = await connection.query('SELECT * FROM users');
             return response.status(200).json(rows);
