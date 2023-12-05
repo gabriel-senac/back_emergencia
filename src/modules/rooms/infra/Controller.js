@@ -7,7 +7,7 @@ export class Controller {
         try {
             const [rows, fields] = await connection.query('SELECT * FROM blocoA');
             console.log(rows);
-            return response.status(200).json({sala: [rows]});
+            return response.status(200).json([rows]);
             } catch (error) {
                 console.error(error);
                 return response.status(500).json({ message: 'Não foi possível obter as salas.' });
