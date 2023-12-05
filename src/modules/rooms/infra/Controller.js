@@ -1,14 +1,24 @@
-// import { connection } from '../../../connection.js'
+import { connection } from '../../../connection.js'
 
 export class Controller {
 
 
-    async getRooms(request, response) {
-
-        return response.status(200).json({message: "GET DEU CERTO"});
+    async getRoomsA(request, response) {
         try {
-            const [rows, fields] = await connection.query('SELECT * FROM users');
-            return response.status(200).json(rows);
+            const [rows, fields] = await connection.query('SELECT * FROM blocoA');
+            console.log(rows);
+            return response.status(200).json([rows]);
+            } catch (error) {
+                console.error(error);
+                return response.status(500).json({ message: 'Não foi possível obter as salas.' });
+            }
+    }
+  
+    async getRoomsB(request, response) {
+        try {
+            const [rows, fields] = await connection.query('SELECT * FROM blocoB');
+            console.log(rows);
+            return response.status(200).json([rows]);
             } catch (error) {
                 console.error(error);
                 return response.status(500).json({ message: 'Não foi possível obter as salas.' });
