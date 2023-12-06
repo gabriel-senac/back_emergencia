@@ -40,7 +40,7 @@ export class Controller {
             }
     }
    
-    async putUpdate(request, response) {
+    async putUpdateblocoA(request, response) {
         const {room} = request.body
 
         if(room ===undefined || room === null ||  room === ''){
@@ -48,7 +48,23 @@ export class Controller {
         }
 
         try {
-            const [rows, fields] = await connection.query('Emergency call on', [room]);
+            const [rows, fields] = await connection.query('UPDATE blocoA SET Emergencia = 0 WHERE ID_sala = ?', [room]);
+            return response.status(200).json({message: "Emergencia da sala atualizada"});
+            } catch (error) {
+                console.error(error);
+                return response.status(500).json({ message: 'Não foi possível atualizar a emergencia da sala.' });
+            }
+    }
+
+    async putUpdateblocoB(request, response) {
+        const {room} = request.body
+
+        if(room ===undefined || room === null ||  room === ''){
+            return response.status(400).json({ message: 'Sala indefinida.' });
+        }
+
+        try {
+            const [rows, fields] = await connection.query('UPDATE blocoB SET Emergencia = 0 WHERE ID_sala = ?', [room]);
             return response.status(200).json({message: "Emergencia da sala atualizada"});
             } catch (error) {
                 console.error(error);
