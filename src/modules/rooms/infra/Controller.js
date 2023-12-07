@@ -26,13 +26,27 @@ export class Controller {
     }
   
 
-    async postRequerimento(request, response) {
+    async postRequerimentoBlocoA(request, response) {
         const {room} = request.body;
         if(room ===undefined || room === null ||  room === ''){
             return response.status(400).json({ message: 'Sala indefinida.' });
         }
         try {
-            const [rows, fields] = await connection.query('INSERT INTO rooms WHERE room = ?', [room]);
+            const [rows, fields] = await connection.query('UPDATE blocoA SET Emergencia = 1 WHERE ID_Sala = ?', [room]);
+            return response.status(201).json(rows);
+            } catch (error) {
+                console.error(error);
+                return response.status(500).json({ message: 'Não foi possivel criar emergencia da sala.' });
+            }
+    }
+
+    async postRequerimentoBlocoB(request, response) {
+        const {room} = request.body;
+        if(room ===undefined || room === null ||  room === ''){
+            return response.status(400).json({ message: 'Sala indefinida.' });
+        }
+        try {
+            const [rows, fields] = await connection.query('UPDATE blocoB SET Emergencia = 1 WHERE ID_Sala = ?', [room]);
             return response.status(201).json(rows);
             } catch (error) {
                 console.error(error);
