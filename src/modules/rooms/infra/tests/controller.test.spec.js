@@ -64,5 +64,26 @@ describe('Controller', () => {
 
     });
 
+    describe('getRoomsB', () => {
+        it('should get rooms from blocoB', async () => {
+            const mockRows = [{ sala: 'Sala B1' }];
+
+            connection.query.mockResolvedValueOnce([mockRows, null])
+
+            const mockRequest = {};
+            const mockResponse = {
+                status: jest.fn().mockReturnThis(),
+                json: jest.fn()
+            }
+
+            await controller.getRoomsB(mockRequest, mockResponse);
+
+            expect(connection.query).toHaveBeenCalledWith('SELECT * FROM blocoB');
+            expect(mockResponse.status).toHaveBeenCalledWith(200);
+            expect(mockResponse.json).toHaveBeenCalledWith([mockRows]);
+        });
+
+    });
+
 });
 
